@@ -383,4 +383,237 @@ Si el usuario elige 2, se le pedirá que ingrese los colores de las bandas y se 
 
 ````
 
+## Calculadora ley de ohm para circuitos de 4 resistencias y fuente de voltaje DC.
+En esta calculadora se tienen 4 tipos de circuitos los cuales difieren enla posicion que tengan las resistencias, es decir, que 4 resistencias pueden estar en serie o en paralelo, las primeras dos en paralelo y las otras dos en serie, e iviseversa.
+
+### 4 en paralelo
+El código que se te muestra es una función llamada "fo_p" que calcula el voltaje, corriente y resistencia total de un circuito eléctrico en paralelo con cuatro resistencias (R1, R2, R3 y R4) a partir de la fuente de voltaje (V) dada. La función llama a otras dos funciones "cor_p" y "paralelo" para realizar los cálculos.
+
+La función "cor_p" calcula la corriente en una resistencia en paralelo, mientras que la función "paralelo" calcula la resistencia total de un conjunto de resistencias en paralelo.
+
+En cuanto a la salida del código, la función "fo_p" imprime el voltaje total y el voltaje de cada resistencia, la corriente de cada resistencia y la resistencia total del circuito. La función "round" se utiliza para redondear los valores de corriente y resistencia a cinco y dos decimales, respectivamente.
+
+```Python
+  def fo_p(V,R1,R2,R3,R4): #4 paralelo
+    print(f"El voltaje total es {V} voltios")
+    print(f"El voltaje de R1 es {V} voltios")
+    print(f"El voltaje de R2 es {V} voltios")
+    print(f"El voltaje de R3 es {V} voltios")
+    print(f"El voltaje de R4 es {V} voltios")
+    print(f"La corriente de R1 es {round(cor_p(V,R1),5)} amperios ")
+    print(f"La corriente de R2 es {round(cor_p(V,R2),5)} amperios ")
+    print(f"La corriente de R3 es {round(cor_p(V,R3),5)} amperios ")
+    print(f"La corriente de R4 es {round(cor_p(V,R4),5)} amperios ")
+    print(f"La resistencia total del circuito es {round(paralelo(R1,paralelo(R2,paralelo(R3,R4))),2)} ohmios")
+```
+
+### 1 y 2 en serie y 3 y 4 en paralelo
+El código es una función que calcula las características eléctricas de un circuito eléctrico compuesto por cuatro resistencias, dos en serie y dos en paralelo. Recibe como argumentos el voltaje de la fuente y los valores de resistencia de cada una de las cuatro resistencias.
+
+La función imprime el voltaje total y la resistencia total del circuito, así como la corriente total del circuito. Luego, calcula el voltaje y la corriente de cada una de las resistencias individuales.
+
+El código utiliza otras dos funciones, "serie" y "paralelo", para calcular la resistencia total del circuito. También utiliza la función "cor_p" para calcular la corriente a través de las resistencias en paralelo.
+
+En resumen, el código es una herramienta útil para calcular las características eléctricas de un circuito específico y puede ser utilizado por personas que trabajan con electrónica o electricidad.
+
+```Python
+  def t_s_t_p(V,R1,R2,R3,R4): # 2 serie 2 paralelo
+    print(f"El voltaje total es {V} voltios")
+    print(f"La resistencia total del circuito es {round(serie(R1,R2)+paralelo(R3,R4),2)} ohmios")
+    print(f"La corriente total del circuito es {round(V/(serie(R1,R2)+paralelo(R3,R4)),5)} amperios")
+    It = V/(serie(R1,R2)+paralelo(R3,R4))
+    print(f"El voltaje de R1 es {round((R1*It),2)} voltios")
+    print(f"El voltaje de R2 es {round((R2*It),2)} voltios")
+    print(f"El voltaje de R3 es {round((V-(R1*It+R2*It)),2)} voltios")
+    print(f"El voltaje de R4 es {round((V-(R1*It+R2*It)),2)} voltios")
+    print(f"La corriente de R1 es {round(It,5)} amperios ")
+    print(f"La corriente de R2 es {round(It,5)} amperios ")
+    print(f"La corriente de R3 es {round((cor_p((V-(R1*It+R2*It)),R3)),5)} amperios ")
+    print(f"La corriente de R4 es {round((cor_p((V-(R1*It+R2*It)),R4)),5)} amperios ")
+
+```
+
+### 1 y 2 en paralelo y 3 y 4 en serie
+Este código es una función que calcula las características eléctricas de un circuito con 4 resistencias, 2 en paralelo y 2 en serie.
+
+La función toma 5 argumentos: el voltaje total del circuito (V) y las resistencias de las 4 resistencias (R1, R2, R3 y R4).
+
+La función utiliza otras funciones llamadas "paralelo", "serie" y "cor_p" para calcular la resistencia total del circuito, la corriente total y el voltaje y corriente individuales de cada resistencia.
+
+Los resultados se imprimen en pantalla utilizando la función "print", y se redondean a 2 o 5 decimales según corresponda para mayor claridad.
+
+```Python
+  def t_p_t_s(V,R1,R2,R3,R4): #2 paralelo 2 serie
+    print(f"El voltaje total es {V} voltios")
+    print(f"La resistencia total del circuito es {round((paralelo(R1,paralelo(R2,serie(R3,R4)))),2)} ohmios")
+    print(f"La corriente total del circuito es {round((V/(paralelo(R1,paralelo(R2,serie(R3,R4))))),5)} amperios")
+    It = V/(paralelo(R1,paralelo(R2,serie(R3,R4))))
+    print(f"El voltaje de R1 es {V} voltios")
+    print(f"El voltaje de R2 es {V} voltios")
+    print(f"El voltaje de R3 es {round((R3*(It-(cor_p(V,R1)+cor_p(V,R2)))),2)} voltios")
+    print(f"El voltaje de R4 es {round((R4*(It-(cor_p(V,R1)+cor_p(V,R2)))),2)} voltios")
+    print(f"La corriente de R1 es {round((cor_p(V,R1)),5)} amperios ")
+    print(f"La corriente de R2 es {round((cor_p(V,R2)),5)} amperios ")
+    print(f"La corriente de R3 es {round((It-(cor_p(V,R1)+cor_p(V,R2))),5)} amperios ")
+    print(f"La corriente de R4 es {round((It-(cor_p(V,R1)+cor_p(V,R2))),5)} amperios ")
+
+```
+
+### Cuatro resistencias en serie
+Este código es una función en Python que calcula las características eléctricas de un circuito con cuatro resistencias conectadas en serie. La función toma como entrada el voltaje V y las resistencias R1, R2, R3 y R4. A continuación, utiliza la función "serie", que está definida en algún otro lugar del código, para calcular la resistencia total del circuito. Luego, utiliza la ley de Ohm para calcular la corriente total del circuito, que se utiliza para calcular el voltaje y la corriente en cada una de las resistencias. Finalmente, se imprimen los resultados en la pantalla. Los valores se redondean a dos o cinco decimales para mayor claridad.
+
+```Python
+  def fo_s(V,R1,R2,R3,R4): #4 serie
+    print(f"El voltaje total es {V} voltios")
+    print(f"La resistencia total del circuito es {round((serie(R1,serie(R2,serie(R3,R4)))),2)} ohmios")
+    print(f"La corriente total del circuito es {round((V/(serie(R1,serie(R2,serie(R3,R4))))),5)} amperios")
+    It=V/serie(R1,serie(R2,serie(R3,R4)))
+    print(f"El voltaje de R1 es {round((It*R1),2)} voltios")
+    print(f"El voltaje de R2 es {round((It*R2),2)} voltios")
+    print(f"El voltaje de R3 es {round((It*R3),2)} voltios")
+    print(f"El voltaje de R4 es {round((It*R4),2)} voltios")
+    print(f"La corriente de R1 es {round(It,5)} amperios ")
+    print(f"La corriente de R2 es {round(It,5)} amperios ")
+    print(f"La corriente de R3 es {round(It,5)} amperios ")
+    print(f"La corriente de R4 es {round(It,5)} amperios ")
+
+```
+
+### Calculadora de las resistencias
+Este código es una función que recopila información sobre un circuito eléctrico y utiliza varias subfunciones para calcular su resistencia total, corriente y voltaje. Primero, el usuario debe elegir una opción (1, 2 o 3), que se almacena en la variable "c", y luego debe ingresar información sobre la fuente de voltaje y cuatro resistencias (cuyos valores se almacenan en las variables "r1", "r2", "r3" y "r4"). Cada vez que el usuario ingresa un valor negativo, se le solicita que lo ingrese nuevamente. Después de recopilar toda la información, la función llama a una subfunción diferente ("fo_p", "t_s_t_p" o "t_p_t_s") dependiendo de la opción elegida por el usuario, que realiza los cálculos necesarios y devuelve un resultado que se imprime en la pantalla.
+
+```Python
+  try:
+      c = int(input())
+  except ValueError:
+      print("por favor ingrese un dato valido")
+      cond = True
+      fin = cond
+      while(fin == True):
+        try:
+           c = int(input())
+           if(type(c)==int):
+            fin=False
+        except ValueError:
+           print("por favor ingrese un dato valido")
+           fin = True
+  while(c>4 or c<1):
+        print("Por favor ingrese una opcion valida")
+        c = int(input())
+  if (c==1):
+    print("Por favor ingrese el voltaje de la fuente del circuito")
+    v = int(input())
+    while(v<0):
+      print("Por favor ingrese el voltaje de la fuente del circuito")
+      v = int(input())
+    print("Por favor ingrese el valor de la resistencia 1")
+    r1 = int(input())
+    while(r1<0):
+      print("Por favor ingrese el valor de la resistencia 1")
+      r1 = int(input())
+    print("Por favor ingrese el valor de la resistencia 2")
+    r2 = int(input())
+    while(r2<0):
+      print("Por favor ingrese el valor de la resistencia 2")
+      r2 = int(input())
+    print("Por favor ingrese el valor de la resistencia 3")
+    r3 = int(input())
+    while(r3<0):
+      print("Por favor ingrese el valor de la resistencia 3")
+      r3 = int(input())
+    print("Por favor ingrese el valor de la resistencia 4")
+    r4 = int(input())
+    while(r4<0):
+      print("Por favor ingrese el valor de la resistencia 4")
+      r4 = int(input())
+    return fo_p(v,r1,r2,r3,r4)
+
+  if (c==2):
+    print("Por favor ingrese el voltaje de la fuente del circuito")
+    v = int(input())
+    while(v<0):
+      print("Por favor ingrese el voltaje de la fuente del circuito")
+      v = int(input())
+    print("Por favor ingrese el valor de la resistencia 1")
+    r1 = int(input())
+    while(r1<0):
+      print("Por favor ingrese el valor de la resistencia 1")
+      r1 = int(input())
+    print("Por favor ingrese el valor de la resistencia 2")
+    r2 = int(input())
+    while(r2<0):
+      print("Por favor ingrese el valor de la resistencia 2")
+      r2 = int(input())
+    print("Por favor ingrese el valor de la resistencia 3")
+    r3 = int(input())
+    while(r3<0):
+      print("Por favor ingrese el valor de la resistencia 3")
+      r3 = int(input())
+    print("Por favor ingrese el valor de la resistencia 4")
+    r4 = int(input())
+    while(r4<0):
+      print("Por favor ingrese el valor de la resistencia 4")
+      r4 = int(input())
+    return t_s_t_p(v,r1,r2,r3,r4)
+
+  if (c==3):
+    print("Por favor ingrese el voltaje de la fuente del circuito")
+    v = int(input())
+    while(v<0):
+      print("Por favor ingrese el voltaje de la fuente del circuito")
+      v = int(input())
+    print("Por favor ingrese el valor de la resistencia 1")
+    r1 = int(input())
+    while(r1<0):
+      print("Por favor ingrese el valor de la resistencia 1")
+      r1 = int(input())
+    print("Por favor ingrese el valor de la resistencia 2")
+    r2 = int(input())
+    while(r2<0):
+      print("Por favor ingrese el valor de la resistencia 2")
+      r2 = int(input())
+    print("Por favor ingrese el valor de la resistencia 3")
+    r3 = int(input())
+    while(r3<0):
+      print("Por favor ingrese el valor de la resistencia 3")
+      r3 = int(input())
+    print("Por favor ingrese el valor de la resistencia 4")
+    r4 = int(input())
+    while(r4<0):
+      print("Por favor ingrese el valor de la resistencia 4")
+      r4 = int(input())
+    return t_p_t_s(v,r1,r2,r3,r4)
+
+  if (c==4):
+    print("Por favor ingrese el voltaje de la fuente del circuito")
+    v = int(input())
+    while(v<0):
+      print("Por favor ingrese el voltaje de la fuente del circuito")
+      v = int(input())
+    print("Por favor ingrese el valor de la resistencia 1")
+    r1 = int(input())
+    while(r1<0):
+      print("Por favor ingrese el valor de la resistencia 1")
+      r1 = int(input())
+    print("Por favor ingrese el valor de la resistencia 2")
+    r2 = int(input())
+    while(r2<0):
+      print("Por favor ingrese el valor de la resistencia 2")
+      r2 = int(input())
+    print("Por favor ingrese el valor de la resistencia 3")
+    r3 = int(input())
+    while(r3<0):
+      print("Por favor ingrese el valor de la resistencia 3")
+      r3 = int(input())
+    print("Por favor ingrese el valor de la resistencia 4")
+    r4 = int(input())
+    while(r4<0):
+      print("Por favor ingrese el valor de la resistencia 4")
+      r4 = int(input())
+    return fo_s(v,r1,r2,r3,r4)
+```
+
 ##
+
+
+    
