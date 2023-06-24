@@ -28,6 +28,8 @@ Requisitos funcionales
 
 ●	R3 El programa se ejecutará en Google Colab.
 
+●	R4 El programa requiere la librería Matplotlib para las graficas de la calculadora de resistencias de un sistema si se quiere ejecutar en un editor de codigo externo a Google Colab.
+
 Requisitos no funcionales
 
 ●	R1 El programa estará codificado en Python.
@@ -261,4 +263,124 @@ En cada caso, si el usuario ingresa un valor no válido, se muestra un mensaje d
       beta = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
     return p_e_c(vcc,rb,rc,beta)
 ```
-## 
+## Calculadora de valor Ohmico por bandas
+### Para 4 bandas
+El código para 4 bandas es una función llamada fo_b que toma un argumento C (cadena de caracteres) que representa el código de colores de una resistencia en formato de cuatro bandas. La función convierte el código de colores en un valor de resistencia y su tolerancia.
+
+El diccionario "val" contiene las claves que representan los colores de las bandas de la resistencia y sus valores correspondientes, que son números del 0 al 9. La función utiliza un bucle for para recorrer cada letra del código de colores y buscar su valor en el diccionario. Los valores se concatenan en una variable "cont", que representa la resistencia total en ohmios.
+
+La tercera banda representa el factor de multiplicación de la resistencia. Si la banda es negra, no se agrega ningún cero a la resistencia total. Si la banda es marrón, se agrega un cero, si es rojo, se agregan dos ceros, y así sucesivamente.
+
+La cuarta banda representa la tolerancia, que puede ser del 5% (banda dorada) o del 10% (banda plateada). La función utiliza una declaración condicional if para imprimir el valor de la resistencia total y su tolerancia.
+
+```Python
+  def fo_b(C): #cuatro bandas
+    cont = ""
+    val = {"n":"0", "c":"1", "r":"2", "na":"3", "a":"4", "ve":"5", "az":"6", "v":"7", "g":"8", "b":"9"}
+    for i,j in val.items():
+      if i == C[0].lower():
+        cont+=j
+    for i,j in val.items():
+      if i == C[1].lower():
+        cont+=j
+    for i,j in val.items():
+      if i==C[2].lower():
+        cont+=("0"*int(j))
+    if C[3].lower() == "d":
+      print(f"La resistencia total es de {cont} ohmios con 5% de tolerancia")
+    if C[3].lower() == "p":
+      print(f"La resistencia total es de {cont} ohmios con 10% de tolerancia")
+
+```
+
+### Para 5 bandas
+
+Este código es una función llamada fi_b(C), que toma un argumento C que representa el código de colores de una resistencia de 5 bandas. El código de colores se descompone en sus valores numéricos utilizando un diccionario llamado val. En la función, se utiliza un loop for para recorrer el diccionario y obtener el valor numérico correspondiente a cada color. Luego, los valores numéricos se concatenan en una cadena cont.
+
+Después, se utiliza una condición if para eliminar cualquier cero inicial en la cadena cont. Entonces, si la última letra del código de colores es una "d", se imprime la resistencia total con una tolerancia del 5%. Si la última letra es una "p", se imprime la resistencia total con una tolerancia del 10%.
+
+En resumen, esta función toma el código de colores de una resistencia de 5 bandas, lo convierte en su valor numérico correspondiente y lo imprime con su tolerancia correspondiente en ohmios.
+
+```Python
+  def fi_b(C): #cinco bandas
+    cont = ""
+    val = {"n":"0", "c":"1", "r":"2", "na":"3", "a":"4", "ve":"5", "az":"6", "v":"7", "g":"8", "b":"9"}
+    for i,j in val.items():
+      if i == C[0].lower():
+        cont+=j
+    for i,j in val.items():
+      if i == C[1].lower():
+        cont+=j
+    for i,j in val.items():
+      if i == C[2].lower():
+        cont+=j
+    for i,j in val.items():
+      if i==C[3].lower():
+        cont+=("0"*int(j))
+    if(cont[0]=="0"):
+      cont = cont[1:]
+    if C[4].lower() == "d":
+      print(f"La resistencia total es de {cont} ohmios con 5% de tolerancia")
+    if C[3].lower() == "p":
+      print(f"La resistencia total es de {cont} ohmios con 10% de tolerancia")
+
+```
+
+### Calculadora de resistencias para 4 o 5 bandas
+Este código es una función que permite al usuario calcular la resistencia de una banda de 4 o 5 colores. Primero, el usuario debe ingresar un número (1 o 2) para seleccionar la cantidad de bandas. Si el usuario ingresa un valor que no es un número, se imprimirá un mensaje de error y se le pedirá que ingrese un valor válido. Si el usuario ingresa un número que no es 1 o 2, se imprimirá un mensaje de error y se le pedirá que ingrese un valor válido.
+
+Si el usuario elige 1, se le pedirá que ingrese los colores de las bandas y se verificará si se han ingresado suficientes bandas. Si no se han ingresado suficientes bandas, se imprimirá un mensaje de error y se le pedirá que ingrese los colores de las bandas nuevamente. La función llama a otra función llamada "fo_b" para calcular la resistencia de la banda de 4 colores.
+
+Si el usuario elige 2, se le pedirá que ingrese los colores de las bandas y se verificará si se han ingresado suficientes bandas. Si no se han ingresado suficientes bandas, se imprimirá un mensaje de error y se le pedirá que ingrese los colores de las bandas nuevamente. La función llama a otra función llamada "fi_b" para calcular la resistencia de la banda de 5 colores.
+
+```Python
+  try:
+      c = int(input())
+  except ValueError:
+      print("por favor ingrese un dato valido")
+      cond = True
+      fin = cond
+      while(fin == True):
+        try:
+           c = int(input())
+           if(type(c)==int):
+            fin=False
+        except ValueError:
+           print("por favor ingrese un dato valido")
+           fin = True
+  while(c>2 or c<1):
+        print("Por favor ingrese una opcion valida")
+        c = int(input())
+  if (c==1):
+    print("""Los colores posibles a ingresar son
+    Negro = N,  Café = C,  Rojo = R, Naranja = NA,
+    Amarillo = A,  Verde = Ve,  Azul = AZ,
+    Blanco = B,  Gris = G,  Violeta = V
+
+    Y para tolerancias solo es valido Dorado = D,  Plata = P
+    """)
+    print("Para calcular su resistencia de 4 bandas")
+    C = [str(k) for k in input("Por favor ingrese las letras que acompañan a los colores separadas por espacio: ").split()]
+    while(len(C)<4):
+      print("No ingreso las suficientes bandas, intenta de nuevo")
+      C = [str(k) for k in input("Por favor ingrese las letras que acompañan a los colores separadas por espacio: ").split()]
+    return fo_b(C)
+
+  if (c==2):
+    print("""Los colores posibles a ingresar son
+    Negro = N,  Café = C,  Rojo = R, Naranja = NA,
+    Amarillo = A,  Verde = Ve,  Azul = AZ,
+    Blanco = B,  Gris = G,  Violeta = V
+
+    Y para tolerancias solo es valido Dorado = D,  Plata = P
+    """)
+    print("Para calcular su resistencia de 5 bandas")
+    C = [str(k) for k in input("Por favor ingrese las letras que acompañan a los colores separadas por espacio: ").split()]
+    while(len(C)<5):
+      print("No ingreso las suficientes bandas, intenta de nuevo")
+      C = [str(k) for k in input("Por favor ingrese las letras que acompañan a los colores separadas por espacio: ").split()]
+    return fi_b(C)
+
+````
+
+##
