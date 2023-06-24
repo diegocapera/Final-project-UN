@@ -2,6 +2,84 @@
 ## Calculadora de circuitos y resistencias de diferentes tipos
 En el siguiente repositorio explicaremos a detalle cada funcion de dicha calculadora para un mayor entendimiento y proposito ya que sus funciones son muy especifícas.
 Comenzando por su estructura este programa utiliza el lenguaje Python para su desarrollo y funcionamiento, complementado con las librerias conocidas como Matplolib, la cual su funcionamiento en el programa es para la graficacion entre corriente y voltaje para la calculadora de resistencia en un sistema.
+#### Planteamiento del problema.
+
+
+Un ingeniero eléctrico desea poder tener un aplicativo en Python que pueda resolver:
+
+1.	Circuitos de polarización DC de configuraciones básicas para transistores BJT NPN.
+
+2.	Calcular por código de colores las resistencias de 4 bandas y 5 bandas con los valores estándar comerciales de tolerancia.
+
+3.	Calcular las corrientes y los voltajes y resistencias totales de circuitos serie y paralelo de resistencias.
+
+4.	Calcular la amplificación de una pequeña señal ac mediante las configuraciones en cascada de fases I y II polarización universal, fase I polarización universal y fase II emisor común con resistencia de emisor, fase I polarización universal y fase II emisor común sin resistencia de emisor, todas las anteriores con el concepto de utilización de by-pass. 
+
+5.	Realizar conversiones de escala de resistencias.
+
+6.	Graficar y definir la resistencia de un sistema mediante dos voltajes y corrientes determinados.
+
+### Requisitos
+Requisitos funcionales
+
+●	R1 El programa deberá estar dispuesto en su mayoría mediante funciones.
+
+●	R2 El programa deberá tener gestión de errores de parte del usuario cuando este digite un dato que no sea correcto.
+
+●	R3 El programa se ejecutará en Google Colab.
+
+Requisitos no funcionales
+
+●	R1 El programa estará codificado en Python.
+
+●	R2 El programa debe tener una precisión máxima de 5 decimales, es decir máximo 5 decimales puede mostrar por respuesta.
+
+●	R3 El código debe superar las 800 líneas de código.
+
+#### datos de entrada
+FUNCIONALIDAD 1: Voltajes, resistencia, valor del beta del transistor.
+
+FUNCIONALIDAD 2: Colores del código de colores de las resistencias.
+
+FUNCIONALIDAD 3: Voltaje y valores de 4 resistencias.
+
+FUNCIONALIDAD 4: Voltajes, resistencia, valor del beta del transistor, voltaje de entrada para amplificación
+
+FUNCIONALIDAD 5: Valores numéricos de Resistencias
+
+FUNCIONALIDAD 6: Voltajes, y corrientes.
+
+Especificación: Todos los datos se deben ingresar en unidades del sistema internacional, es decir, en Voltios, Ohmios, Amperios etc.
+
+#### datos de salinda
+FUNCIONALIDAD 1: Voltajes y corrientes del transistor.
+
+FUNCIONALIDAD 2: Valor numérico de las resistencias.
+
+FUNCIONALIDAD 3: Voltajes y corrientes de las 4 resistencias.
+
+FUNCIONALIDAD 4: Voltajes y corrientes del transistor y las amplificaciones parciales, totales y la salida de voltaje total
+
+FUNCIONALIDAD 5: Valores numéricos de Resistencias según la escala
+
+FUNCIONALIDAD 6: Grafica de resistencia en con ejes V vs I y el valor de dicha resistencia
+
+Especificación: Todos los datos se mostrarán en unidades del sistema internacional, es decir, en Voltios, Ohmios, Amperios etc.
+
+### Estrategia de solición
+Utilización de fórmulas de cálculo dadas en los libros de electricidad y electrónica.
+
+Utilización de la ley de Ohm.
+
+Utilización de los objetos geométricos asociados al comportamiento proporcional de voltajes y resistencias en un sistema.
+
+Utilización de conocimientos previos para la implementación de las funcionalidades de los transistores polarizados.
+
+### Algoritmo de solución
+![image](https://github.com/diegocapera/Final-project-UN/assets/124608110/311ceb0d-1ab2-411c-9055-770190c229eb)
+
+
+
 ## Calculadora de polarizaciones básicas
 Comenzanco con esta calculadora se tienen 4 tipos de circuitos en las cuales se puede usar as cuales son la polarizacion universal, base comun, emisor comun con resistencia de emisor y por ultimo polarizacion de emisor comun.
 ![Polarizaciones](https://github.com/diegocapera/Final-project-UN/assets/124608110/0ddfa21a-e069-43cf-8dbf-e10c33c9a1db)
