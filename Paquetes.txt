@@ -1,0 +1,2 @@
+Para poder ejecuar el programa se necesita este paquete para la calculadora de resistencias del sistema
+- Matplotlib: https://pypi.org/project/matplotlib/#files
