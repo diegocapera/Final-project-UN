@@ -38,7 +38,7 @@ Requisitos no funcionales
 
 ●	R3 El código debe superar las 800 líneas de código.
 
-#### datos de entrada
+#### Datos de entrada
 FUNCIONALIDAD 1: Voltajes, resistencia, valor del beta del transistor.
 
 FUNCIONALIDAD 2: Colores del código de colores de las resistencias.
@@ -53,7 +53,7 @@ FUNCIONALIDAD 6: Voltajes, y corrientes.
 
 Especificación: Todos los datos se deben ingresar en unidades del sistema internacional, es decir, en Voltios, Ohmios, Amperios etc.
 
-#### datos de salinda
+#### Datos de salinda
 FUNCIONALIDAD 1: Voltajes y corrientes del transistor.
 
 FUNCIONALIDAD 2: Valor numérico de las resistencias.
@@ -613,7 +613,174 @@ Este código es una función que recopila información sobre un circuito eléctr
     return fo_s(v,r1,r2,r3,r4)
 ```
 
-##
+## Calculadora de amplificación en Cascada de transistores BJT.
+Una calculadora de amplificación en cascada con transistores BJT programada en Python es una herramienta útil para diseñar y analizar circuitos electrónicos que utilizan transistores bipolares de unión (BJT) en configuración de cascada. El programa permite al usuario ingresar los valores de las resistencias, capacitores y voltajes de entrada y salida del circuito, y calcula automáticamente los valores de ganancia de voltaje, ganancia de corriente, impedancia de entrada, impedancia de salida y otros parámetros importantes del circuito.
 
+El programa se basa en las ecuaciones matemáticas que describen el comportamiento de los transistores BJT en configuración de cascada, y utiliza técnicas de programación orientada a objetos para organizar el código en módulos y clases que facilitan la lectura y el mantenimiento del código.
 
-    
+### Fase I Polarizacion Universal Fase II Polarizacion Universal.
+El código es una función que realiza el análisis y cálculo de un amplificador en cascada con transistores BJT. La función recibe como entrada valores de voltajes, resistencias y beta para dos etapas del amplificador. En la primera etapa, se realiza la polarización del transistor y se calculan las corrientes de base, emisor y colector, así como el voltaje de colector-emisor y los voltajes de las resistencias de colector y emisor. En la segunda etapa se realiza el análisis AC del circuito y se calcula la amplificación total del sistema, así como el voltaje resultante de la amplificación total y parcial de la señal de entrada. El código es útil para estudiantes y profesionales interesados en el diseño y análisis de circuitos electrónicos con transistores BJT en cascada.
+
+```Python
+  def po_un_2(vin,vcc,r1,r2,rc,RE,beta,vcc2,r12,r22,rc2,RE2,beta2): #polarizacion universal polarizacion universal
+     #polarizacion fase I
+    vth = vcc*(r2/(r1+r2))
+    rth = ((r1*r2)/(r1+r2))
+    Ib = (vth-0.7)/(rth+RE*(beta+1))
+    Ie = (beta+1)*Ib
+    Ic = beta*Ib
+    Vce = vcc - Ic*(rc+RE)
+    #polarizacion fase II
+    vth2 = vcc2*(r22/(r12+r22))
+    rth2 = ((r12*r22)/(r12+r22))
+    Ib2 = (vth2-0.7)/(rth2+RE2*(beta2+1))
+    Ie2 = (beta2+1)*Ib2
+    Ic2 = beta2*Ib2
+    Vce2 = vcc2 - Ic2*(rc2+RE2)
+
+    #Analisis AC1
+    re = 0.026/Ie
+    AVnl1 = -rc/re
+    Zi2 = (rth2*RE2)/(rth2+RE2)
+    Av1 = ((Zi2)/(Zi2+rc))*AVnl1
+    #Analisis AC2
+    re2= 0.026/Ie2
+    AVnl2 = -rc2/re2
+    Av2 = ((1000)/(1000+rc2))*AVnl2
+    #Analisis total AC
+    Avt = Av1*Av2
+    Voutp = vin*Av1
+    Vout = vin*Avt
+
+    #polarizacion fase I
+    print(f"\nLa corriente de base es {round(Ib,5)} amperios")
+    print(f"La corriente de emisor es {round(Ie,4)} amperios ")
+    print(f"La corriente de colector es {round(Ic,4)} amperios")
+    print(f"El voltaje de colector emisor es {round(Vce,4)} Voltios")
+    print(f"La voltaje de Resistencia de colector es {round((Ic*rc),4)} Voltios")
+    print(f"La voltaje de Resistencia de emisor es {round((Ie*RE),4)} Voltios")
+    #polarizacion fase II
+    print(f"\nLa corriente de base es {round(Ib2,5)} amperios")
+    print(f"La corriente de emisor es {round(Ie2,4)} amperios ")
+    print(f"La corriente de colector es {round(Ic2,4)} amperios")
+    print(f"El voltaje de colector emisor es {round(Vce2,4)} Voltios")
+    print(f"La voltaje de Resistencia de colector es {round((Ic2*rc2),4)} Voltios")
+    print(f"La voltaje de Resistencia de emisor es {round((Ie2*RE2),4)} Voltios")
+    #Amplificacion de señal
+    print(f"\nLa amplificacion total del sistema es de {round(Avt,5)}")
+    print(f"El voltaje resultante de la amplificacion de la señal de entrada es {round(Vout,5)} V")
+    print(f"El voltaje resultante de la amplificacion parcial de la señal de entrada es {round(Voutp,5)} V")
+```
+
+### Fase I Polarizacion Universal Fase II Emisor comun con resistencia de emisor.
+
+El código es una función que calcula las características de una polarización universal de un circuito amplificador compuesto por dos etapas de un transistor BJT en cascada. La función toma los valores de resistencia, voltaje y factor beta de cada etapa y realiza una serie de cálculos para obtener la corriente, voltaje y amplificación total del circuito.
+
+La función también realiza un análisis AC del circuito, que incluye el cálculo de la ganancia de voltaje, la impedancia de entrada y la ganancia de voltaje total del sistema. Finalmente, la función muestra los resultados de la polarización de cada etapa y la amplificación de la señal de entrada.
+
+```Python
+  def po_un_ecre(vcc,r1,r2,rc,RE,beta,vcc2,rb2,rc2,RE2,beta2): #polarizacion universal polarizacoin emisor comun resistencia emisor
+    vth = vcc*(r2/(r1+r2))
+    rth = ((r1*r2)/(r1+r2))
+    Ib = (vth-0.7)/(rth+RE*(beta+1))
+    Ie = (beta+1)*Ib
+    Ic = beta*Ib
+    Vce = vcc - Ic*(rc+RE)
+
+    Ib2 = (vcc2-0.7)/(rb2+RE2*(beta2+1))
+    Ie2 = (beta2+1)*Ib2
+    Ic2 = beta2*Ib2
+    Vce2 = vcc2 - Ic2*(rc2+RE2)
+
+    #Analisis AC1
+    re = 0.026/Ie
+    AVnl1 = -rc/re
+    Zi2 = (rb2*RE2)/(rb2+RE2)
+    Av1 = ((Zi2)/(Zi2+rc))*AVnl1
+    #Analisis AC2
+    re2 = 0.026/Ie2
+    AVnl2 = -rc2/re2
+    Av2 = ((1000)/(1000+rc2))*AVnl2
+    #Analisis total AC
+    Avt = Av1*Av2
+    Voutp = vin*Av1
+    Vout = vin*Avt
+
+    #polarizacion fase I
+    print(f"\nLa corriente de base es {round(Ib,5)} amperios")
+    print(f"La corriente de emisor es {round(Ie,4)} amperios ")
+    print(f"La corriente de colector es {round(Ic,4)} amperios")
+    print(f"El voltaje de colector emisor es {round(Vce,4)} Voltios")
+    print(f"La voltaje de Resistencia de colector es {round((Ic*rc),4)} Voltios")
+    print(f"La voltaje de Resistencia de emisor es {round((Ie*RE),4)} Voltios")
+    #polarizacion fase II
+    print(f"\nLa corriente de base es {round(Ib2,5)} amperios")
+    print(f"La corriente de emisor es {round(Ie2,4)} amperios ")
+    print(f"La corriente de colector es {round(Ic2,4)} amperios")
+    print(f"El voltaje de colector emisor es {round(Vce2,4)} Voltios")
+    print(f"La voltaje de Resistencia de colector es {round((Ic2*rc2),4)} Voltios")
+    print(f"La voltaje de Resistencia de emisor es {round((Ie2*RE2),4)} Voltios")
+    print(f"La voltaje de Resistencia de base es {round((Ib2*rb2),4)} Voltios")
+    #Amplificacion de señal
+    print(f"\nLa amplificacion total del sistema es de {round(Avt,5)}")
+    print(f"El voltaje resultante de la amplificacion de la señal de entrada es {round(Vout,5)} V")
+    print(f"El voltaje resultante de la amplificacion parcial de la señal de entrada es {round(Voutp,5)} V")
+````
+
+### Fase I Polarización Universal Fase II Emisor común.
+
+El código es una función llamada "po_un_ec" que calcula los parámetros de un circuito amplificador en cascada basado en transistores BJT. Los parámetros de entrada son la fuente de alimentación Vcc, las resistencias R1, R2, RC, y RE, el parámetro beta del transistor, otra fuente de alimentación Vcc2, las resistencias RB2 y RC2, y el parámetro beta2 del segundo transistor.
+
+La función primero realiza la polarización del circuito, calculando las corrientes de base, emisor y colector, así como el voltaje de colector-emisor y las tensiones a través de las resistencias de colector y emisor. Luego, realiza un análisis AC del circuito, calculando la amplificación de voltaje en cada etapa y la amplificación total. También calcula el voltaje de salida de la señal de entrada para cada etapa y la señal de salida total.
+
+Finalmente, la función imprime los resultados de la polarización de cada etapa y la amplificación total del circuito, así como los voltajes resultantes de la amplificación de la señal de entrada en cada etapa y la señal de salida total.
+
+```Python
+  def po_un_ec(vcc,r1,r2,rc,RE,beta,vcc2,rb2,rc2,beta2): #polarizacion universal emisor comun
+    vth = vcc*(r2/(r1+r2))
+    rth = ((r1*r2)/(r1+r2))
+    Ib = (vth-0.7)/(rth+RE*(beta+1))
+    Ie = (beta+1)*Ib
+    Ic = beta*Ib
+    Vce = vcc - Ic*(rc+RE)
+
+    Ib2 = (vcc2-0.7)/(rb2)
+    Ie2 = (beta2+1)*Ib2
+    Ic2 = beta2*Ib2
+    Vce2 = vcc2 - Ic2*(rc2)
+
+    #Analisis AC1
+    re = 0.026/Ie
+    AVnl1 = -rc/re
+    Zi2 = (rb2*(beta*re))/(rb2+(beta*re))
+    Av1 = ((Zi2)/(Zi2+rc))*AVnl1
+    #Analisis AC2
+    re2 = 0.026/Ie2
+    AVnl2 = -rc2/re2
+    Av2 = ((1000)/(1000+rc2))*AVnl2
+    #Analisis total AC
+    Avt = Av1*Av2
+    Voutp = vin*Av1
+    Vout = vin*Avt
+
+    #polarizacion fase I
+    print(f"\nLa corriente de base es {round(Ib,5)} amperios")
+    print(f"La corriente de emisor es {round(Ie,4)} amperios ")
+    print(f"La corriente de colector es {round(Ic,4)} amperios")
+    print(f"El voltaje de colector emisor es {round(Vce,4)} Voltios")
+    print(f"La voltaje de Resistencia de colector es {round((Ic*rc),4)} Voltios")
+    print(f"La voltaje de Resistencia de emisor es {round((Ie*RE),4)} Voltios")
+    #polarizacion fase II
+    print(f"\nLa corriente de base es {round(Ib2,5)} amperios")
+    print(f"La corriente de emisor es {round(Ie2,4)} amperios ")
+    print(f"La corriente de colector es {round(Ic2,4)} amperios")
+    print(f"El voltaje de colector emisor es {round(Vce2,4)} Voltios")
+    print(f"La voltaje de Resistencia de colector es {round((Ic2*rc2),4)} Voltios")
+    print(f"La voltaje de Resistencia de base es {round((Ib2*rb2),4)} Voltios")
+    #Amplificacion de señal
+    print(f"\nLa amplificacion total del sistema es de {round(Avt,5)}")
+    print(f"El voltaje resultante de la amplificacion de la señal de entrada es {round(Vout,5)} V")
+    print(f"El voltaje resultante de la amplificacion parcial de la señal de entrada es {round(Voutp,5)} V")
+```
+
+### Calculadora de amplificación
