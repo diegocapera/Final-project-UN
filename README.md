@@ -784,3 +784,335 @@ Finalmente, la función imprime los resultados de la polarización de cada etapa
 ```
 
 ### Calculadora de amplificación
+El código que consta de una función llamada "po_un_2" para realizar cálculos en un amplificador en cascada con transistores BJT. Esta función requiere varios parámetros de entrada para llevar a cabo los cálculos. Antes de ingresar los parámetros, se realiza una verificación para asegurarse de que el usuario ingrese una opción válida para la función. En caso de que el usuario proporcione un valor inválido, se le solicita que ingrese un valor válido hasta que lo haga.
+
+Una vez que se han ingresado los parámetros válidos, se procede a solicitar los valores necesarios para realizar los cálculos. Si el usuario ingresa un valor negativo o cero para alguno de los parámetros, se le pide que ingrese un valor válido hasta que lo haga.
+
+Una vez que se han ingresado todos los valores de los parámetros, la función "po_un_2" realiza los cálculos necesarios y devuelve un resultado. Parece que este código es una extensión de un programa previo que calcula la configuración de un amplificador en cascada utilizando transistores BJT.
+
+La sección de código proporcionada parece encargarse de la entrada del usuario y los valores necesarios para calcular la ganancia de voltaje, la impedancia de entrada y la ganancia total de la configuración del amplificador. Se utiliza un bucle while para asegurar que los valores ingresados por el usuario sean válidos. Si el usuario proporciona un valor negativo o cero, el programa solicita al usuario que ingrese un valor válido. Una vez que se ingresan los valores válidos, se devuelve la salida del programa mediante una llamada a la función "po_un_ecre", que posiblemente realice los cálculos necesarios para determinar la ganancia de voltaje, la impedancia de entrada y la ganancia total del amplificador.
+
+```Python
+  try:
+      c = int(input())
+  except ValueError:
+      print("por favor ingrese un dato valido")
+      cond = True
+      fin = cond
+      while(fin == True):
+        try:
+           c = int(input())
+           if(type(c)==int):
+            fin=False
+        except ValueError:
+           print("por favor ingrese un dato valido")
+           fin = True
+  while(c>3 or c<1):
+        print("Por favor ingrese una opcion valida")
+        c = int(input())
+  if (c==1):
+    print("Por favor ingrese los siguientes datos")
+    vin = float(input("Ingrese el valor del Voltaje de entrada:   "))
+    while(vin<0 or vin==0):
+      vin = float(input("Ingrese el valor del Voltaje de entrada a 0:   "))
+    vcc = float(input("Ingrese el valor del Voltaje de colector comun:   "))
+    while(vcc<0 or vcc==0):
+      vcc = float(input("Ingrese el valor del Voltaje de colector comun mayor a 0:   "))
+    r1 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    while(r1<0):
+      r1 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    r2 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    while(r2<0):
+      r2 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    rc = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    while(rc<0):
+      rc = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    RE = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    while(RE<0):
+      RE = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    beta = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    while(beta<50 or beta>500):
+      beta = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+
+    vcc2 = float(input("Ingrese el valor del Voltaje de colector comun:   "))
+    while(vcc2<0 or vcc2==0):
+        vcc2 = float(input("Ingrese el valor del Voltaje de colector comun mayor a 0:   "))
+    r12 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    while(r12<0):
+      r12 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    r22 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    while(r22<0):
+      r22 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    rc2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    while(rc2<0):
+      rc2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    RE2 = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    while(RE2<0):
+      RE2 = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    beta2 = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    while(beta2<50 or beta2>500):
+      beta2 = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    return po_un_2(vin,vcc,r1,r2,rc,RE,beta,vcc2,r12,r22,rc2,RE2,beta2)
+
+
+  if (c==2):
+    print("Por favor ingrese los siguientes datos")
+    vin = float(input("Ingrese el valor del Voltaje de entrada:   "))
+    while(vin<0 or vin==0):
+      vin = float(input("Ingrese el valor del Voltaje de entrada a 0:   "))
+    vcc = float(input("Ingrese el valor del Voltaje de colector comun:   "))
+    while(vcc<0 or vcc==0):
+      vcc = float(input("Ingrese el valor del Voltaje de colector comun mayor a 0:   "))
+    r1 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    while(r1<0):
+      r1 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    r2 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    while(r2<0):
+      r2 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    rc = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    while(rc<0):
+      rc = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    RE = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    while(RE<0):
+      RE = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    beta = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    while(beta<50 or beta>500):
+      beta = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    vcc2 = float(input("Ingrese el valor del Voltaje de colector comun:   "))
+    while(vcc2<0 or vcc2==0):
+      vcc2 = float(input("Ingrese el valor del voltaje de colector comun mayor a 0:   "))
+    rb2 = float(input("Ingrese el valor de la resistencia rb en ohmios:   "))
+    while(rb2<0):
+      rb2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    rc2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    while(rc2<0):
+      rc2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    RE2 = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    while(RE2<0):
+      RE2 = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    beta2 = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    while(beta2<50 or beta2>500):
+      beta2 = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    return po_un_ecre(vcc,r1,r2,rc,RE,beta,vcc2,rb2,rc2,RE2,beta2)
+
+
+  if (c==3):
+    print("Por favor ingrese los siguientes datos")
+    vin = float(input("Ingrese el valor del Voltaje de entrada:   "))
+    while(vin<0 or vin==0):
+      vin = float(input("Ingrese el valor del Voltaje de entrada a 0:   "))
+    vcc = float(input("Ingrese el valor del Voltaje de colector comun:   "))
+    while(vcc<0 or vcc==0):
+      vcc = float(input("Ingrese el valor del Voltaje de colector comun mayor a 0:   "))
+    r1 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    while(r1<0):
+      r1 = float(input("Ingrese el valor de la resistencia r1 en ohmios:   "))
+    r2 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    while(r2<0):
+      r2 = float(input("Ingrese el valor de la resistencia r2 en ohmios:   "))
+    rc = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    while(rc<0):
+      rc = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    RE = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    while(RE<0):
+      RE = float(input("Ingrese el valor de la resistencia RE en ohmios:   "))
+    beta = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    while(beta<50 or beta>500):
+      beta = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+
+    vcc2 = float(input("Ingrese el valor del Voltaje de colector comun:   "))
+    while(vcc2<0 or vcc2==0):
+      vcc2 = float(input("Ingrese el valor del voltaje de colector comun mayor a 0:   "))
+    rb2 = float(input("Ingrese el valor de la resistencia rb en ohmios:   "))
+    while(rb2<0):
+      rb2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    rc2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    while(rc2<0):
+      rc2 = float(input("Ingrese el valor de la resistencia rc en ohmios:   "))
+    beta2 = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    while(beta2<50 or beta2>500):
+      beta2 = int(input("Ingrese un numero mayor o igual a 50 y menor o igual a 500:  "))
+    return po_un_ec(vcc,r1,r2,rc,RE,beta,vcc2,rb2,rc2,beta2)
+```
+
+## Calculadora de resistencias equivalentes
+Una calculadora de resistencias es una herramienta que permite convertir un valor de resistencia equivalente a otro. Esto se logra ingresando el valor de resistencia original y seleccionando el tipo de conversión que se desea realizar, ya sea por el código de colores de las bandas de la resistencia, por la notación científica, o por el valor numérico de la resistencia. La calculadora muestra entonces el valor de resistencia equivalente y puede incluso mostrar un diagrama con las bandas de colores correspondientes a la nueva resistencia. Este tipo de calculadora es muy útil para diseñar y analizar circuitos electrónicos, ya que permite seleccionar las resistencias adecuadas para cada etapa del circuito y asegurar un funcionamiento óptimo del mismo.
+
+### Valores disponibles por cada función
+El código proporciona seis funciones para convertir valores de resistencia entre diferentes unidades. La función k_o(r) convierte una resistencia en kiloohmios (kΩ) a ohmios (Ω), la función M_o(r) convierte una resistencia en megaohmios (MΩ) a ohmios, la función m_o(r) convierte una resistencia en miliohmios (mΩ) a ohmios, la función o_k(r) convierte una resistencia en ohmios a kiloohmios y la función o_M(r) convierte una resistencia en ohmios a megaohmios. Por último, la función o_m(r) convierte una resistencia en ohmios a miliohmios. Cada función utiliza una fórmula matemática para realizar la conversión y muestra el resultado en un mensaje de texto.
+
+```Python
+  def k_o(r):
+    convr = r*1000
+    print(f"La resistencia ingresada es de {r} kiloohmios y su equivalente en ohmios es {convr} ohmios")
+
+  def M_o(r):
+    convr = r*1000000
+    print(f"La resistencia ingresada es de {r} megaohmios y su equivalente en ohmios es {convr} ohmios")
+
+  def m_o(r):
+    convr = r/1000
+    print(f"La resistencia ingresada es de {r} miliohmios y su equivalente en ohmios es {convr} ohmios")
+
+  def o_k(r):
+    convr = r/1000
+    print(f"La resistencia ingresada es de {r} ohmios y su equivalente en kiloohmios es {convr} kiloohmios")
+
+  def o_M(r):
+    convr = r/1000000
+    print(f"La resistencia ingresada es de {r} ohmios y su equivalente en megaohmios es {convr} megaohmios")
+
+  def o_m(r):
+    convr = r*1000
+    print(f"La resistencia ingresada es de {r} ohmios y su equivalente en miliohmios es {convr} miliohmios")
+```
+
+### Calculadora de equivalencia
+
+Este código es una función que convierte valores de resistencia entre diferentes unidades: ohms, kiloohms, megaohms y miliohmios. La función comienza pidiendo al usuario que ingrese un número entero entre 1 y 6 para seleccionar la unidad de resistencia que desea convertir. Si el usuario ingresa un valor que no es un número entero, se le pedirá que ingrese un dato válido. Si el usuario ingresa un número que no está en el rango de 1 a 6, se le pedirá que ingrese una opción válida. Luego, se le pide al usuario que ingrese el valor de la resistencia que desea convertir y se verifica que sea un número positivo. Dependiendo de la opción seleccionada por el usuario, se llama a una de las funciones de conversión correspondientes y se devuelve el valor convertido.
+
+```Python
+  try:
+      c = int(input())
+  except ValueError:
+      print("por favor ingrese un dato valido")
+      cond = True
+      fin = cond
+      while(fin == True):
+        try:
+           c = int(input())
+           if(type(c)==int):
+            fin=False
+        except ValueError:
+           print("por favor ingrese un dato valido")
+           fin = True
+  while(c>6 or c<1):
+        print("Por favor ingrese una opcion valida")
+        c = int(input())
+  if (c==1):
+    print("Por favor ingrese solamente el valor numerico de una resistencia en kiloohmios, ejemplo: 1, 2, 3...")
+    r = float(input())
+    while(r<0):
+      print("Por favor ingrese solamente el valor numerico de una resistencia en kiloohmios, ejemplo: 1, 2, 3...")
+      r = float(input())
+    return k_o(r)
+
+  if (c==2):
+    print("Por favor ingrese solamente el valor numerico de una resistencia en megaohmios, ejemplo: 1, 2, 3...")
+    r = float(input())
+    while(r<0):
+      print("Por favor ingrese solamente el valor numerico de una resistencia en megaohmios, ejemplo: 1, 2, 3...")
+      r = float(input())
+    return M_o(r)
+
+  if (c==3):
+    print("Por favor ingrese solamente el valor numerico de una resistencia en miliohmios, ejemplo: 1, 2, 3...")
+    r = float(input())
+    while(r<0):
+      print("Por favor ingrese solamente el valor numerico de una resistencia en miliohmios, ejemplo: 1, 2, 3...")
+      r = float(input())
+    return m_o(r)
+
+  if (c==4):
+    print("Por favor ingrese solamente el valor numerico de una resistencia en ohmios, ejemplo: 1, 2, 3...")
+    r = float(input())
+    while(r<0):
+      print("Por favor ingrese solamente el valor numerico de una resistencia en ohmios, ejemplo: 1, 2, 3...")
+      r = float(input())
+    return o_k(r)
+
+  if (c==5):
+    print("Por favor ingrese solamente el valor numerico de una resistencia en ohmios, ejemplo:1 , 2, 3...")
+    r = float(input())
+    while(r<0):
+      print("Por favor ingrese solamente el valor numerico de una resistencia en ohmios, ejemplo:1 , 2, 3...")
+      r = float(input())
+    return o_M(r)
+
+  if (c==6):
+    print("Por favor ingrese solamente el valor numerico de una resistencia en ohmios, ejemplo: 1, 2, 3...")
+    r = float(input())
+    while(r<0):
+      print("Por favor ingrese solamente el valor numerico de una resistencia en ohmios, ejemplo: 1, 2, 3...")
+      r = float(input())
+    return o_m(r)
+```
+
+## Calculadora de resistencia en un sistema
+
+Esta calculadora permitiría al usuario introducir valores de resistencia y voltaje, y calcular la corriente que fluye a través del circuito. También permitiría al usuario trazar una gráfica del voltaje con respecto a la corriente para visualizar mejor la relación entre estas dos variables. Al utilizar Python como lenguaje de programación, el usuario podría aprovechar todas las funcionalidades que ofrece este lenguaje para llevar a cabo cálculos complejos y visualizaciones de datos en tiempo real.
+
+### Funcionamiento
+
+Este es un código de una función llamada seleccion() que muestra un menú de opciones al usuario para seleccionar una herramienta. El usuario ingresa un número correspondiente a la herramienta que desea utilizar. La función luego procesa la entrada del usuario y redirige al usuario a la herramienta correspondiente según el número ingresado.
+
+La función también contiene bloques try y except para manejar excepciones en caso de que el usuario ingrese una entrada no válida. Si el usuario ingresa un número que no está dentro del rango de opciones, la función le pedirá al usuario que ingrese una opción válida.
+
+Las herramientas disponibles son: polarización, bandas, ley de Ohm, amplificadores BJT, resistencias equivalentes y un programa de gráficos resistencia-corriente.
+
+En general, esta función se utiliza para brindar opciones a los usuarios y guiarlos a través del proceso de selección de una herramienta específica en función de sus necesidades.
+
+```Python
+
+def seleccion():#funcion de seleccion de utilidades generales
+  print("Por favor ingrese el numero de la herramienta que desea utilizar")
+  try:
+      s = int(input())
+  except ValueError:
+      print("por favor ingrese un dato valido")
+      cond = True
+      fin = cond
+      while(fin == True):
+        try:
+           s = int(input())
+           if(type(s)==int):
+            fin=False
+        except ValueError:
+           print("por favor ingrese un dato valido")
+           fin = True
+  while(s>6 or s<1):
+        print("Por favor ingrese una opcion valida")
+        s = int(input())
+  if (s==1):
+    return polarizacion()
+  if (s==2):
+    return bandas()
+  if (s==3):
+    return C_ley_de_ohm_r_VDC()
+  if (s==4):
+    return C_amp_en_Cda_BJT()
+  if (s==5):
+    return C_r_eq()
+  if (s==6):
+    print("Por favor ingrese dos coordenadas de voltaje, tenga en cuenta que deben ser positivas")
+    v = [float(x) for x in input().split()]
+    while(len(v)>2 or len(v)<2):
+      print("Por favor ingrese dos coordenadas de voltaje, tenga en cuenta que deben ser positivas")
+      v = [float(x) for x in input().split()]
+    print("Por favor ingrese dos coordenadas de corriente, tenga en cuenta que deben ser positivas")
+    c = [float(y) for y in input().split()]
+    while(len(c)>2 or len(c)<2):
+      print("Por favor ingrese dos coordenadas de voltaje, tenga en cuenta que deben ser positivas")
+      c = [float(y) for y in input().split()]
+    return C_r_s(c,v)
+```
+## Finalización del programa
+Para finalizar, esta parte del codigo que muestra un menú de opciones y le pregunta al usuario qué opción desea seleccionar. Después de que el usuario selecciona una opción, el programa realiza una acción y le pregunta al usuario si desea utilizar el programa de nuevo.
+La función main() llama a las funciones menu() y seleccion() que se encargan de mostrar el menú y permitir que el usuario seleccione una opción.
+La línea main() llama a la función main() para iniciar el programa.
+Después de que el programa se ejecuta, le pregunta al usuario si desea utilizar el programa nuevamente utilizando un bucle while para permitir que el usuario utilice el programa varias veces si lo desea.
+Finalmente, el programa muestra un mensaje de agradecimiento al usuario por utilizar el programa.
+
+```Python
+def main():
+  menu()
+  seleccion()
+main()
+print("Desea utilizar otra el programa? S o N")
+des = input()
+while(des.lower()=="s" or des.lower()=="si"):
+  main()
+  print("Desea utilizar otra el programa? S o N")
+  des = input()
+print("Gracias por utilizar este programa")
+```
